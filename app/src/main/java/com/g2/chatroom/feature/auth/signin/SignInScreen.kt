@@ -72,15 +72,19 @@ fun SignInScreen(navController: NavController) {
             )
             Spacer(modifier = Modifier.size(16.dp))
 
-            Button(
-                onClick = { viewModel.signIn(email, password) },
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(text = "Sign In")
-            }
+            if (uiState.value == SignInState.Loading) {
+                CircularProgressIndicator()
+            } else {
+                Button(
+                    onClick = { viewModel.signIn(email, password) },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(text = "Sign In")
+                }
 
-            TextButton(onClick = { navController.navigate("signup") }) {
-                Text(text = "Don't have an account? Sign Up")
+                TextButton(onClick = { navController.navigate("signup") }) {
+                    Text(text = "Don't have an account? Sign Up")
+                }
             }
         }
     }
